@@ -1,0 +1,50 @@
+ul{
+  list-style: none;
+}
+li{
+  padding: 0.5em;
+  font-family: "Sarabun Bold";
+  transition: 0.25s;
+}
+.navBar li:not(#line){
+  cursor: pointer;
+}
+
+.navBar li:hover:not(#line){
+  color: var(--primary-color-button);
+}
+
+.sideBar{
+  background-color: transparent;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10000;
+  transition: 0.25s;
+}
+
+.menuSideBarAnimation{
+  transform: translateX(0%) !important;
+}
+
+.sideBarAnimation{
+  background-color: rgba(0,0,0,0.5);;
+}
+.menuSideBar{
+  height: 100%;
+  transform: translateX(-100%);
+  transition: 0.25s;
+}
+
+.menuSideBar ul li{
+  color: white;
+  cursor: pointer;
+}
+
+.navBarSticky{
+  position: sticky;
+  top:0;
+  z-index: 500;
+}

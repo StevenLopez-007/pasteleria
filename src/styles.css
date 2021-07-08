@@ -1,1 +1,125 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "breakPointsHidden.css";
+@import '~swiper/swiper-bundle';
+
+.swiperLandingPage .swiper-slide{
+  height: auto;
+}
+.swiperLandingPage .swiper-pagination-bullet{
+  background-color: var(--secondary-color);
+}
+.swiperLandingPage .swiper-pagination-bullet.swiper-pagination-bullet-active{
+  background-color: var(--secondary-color);
+}
+
+@font-face {
+  font-family: 'Dancing Bold';
+  src: url('assets/fonts/Dancing/DancingScript-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'Dancing Regular';
+  src: url('assets/fonts/Dancing/DancingScript-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Crete Regular';
+  src: url('assets/fonts/Crete/CreteRound-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Sarabun Medium';
+  src: url('assets/fonts/Sarabun/Sarabun-Medium.ttf');
+}
+
+@font-face {
+  font-family: 'Sarabun Bold';
+  src: url('assets/fonts/Sarabun/Sarabun-Bold.ttf');
+}
+
+
+
+.dancingB{
+  font-family: 'Dancing Bold';
+}
+.dancingR {
+  font-family: 'Dancing Regular';
+}
+.creteR {
+  font-family: 'Crete Regular';
+}
+.sarabunM {
+  font-family: 'Sarabun Medium';
+}
+.sarabunB {
+  font-family: 'Sarabun Bold';
+}
+
+
+*{
+  --primery-color:#FEECEC;
+  --secondary-color:#DC8AA0;
+  --tertiary-color:#FFF5F6;
+  --cuartary-color:#f5dede;
+
+  --primary-color-button:#C00908;
+}
+
+.bg-primary-per{
+  background-color: var(--primery-color);
+}
+.bg-secondary-per{
+  background-color: var(--secondary-color);
+}
+.bg-cuartary-per{
+  background-color: var(--cuartary-color);
+}
+
+
+.bg-transparent-per{
+  background-color: transparent;
+}
+
+.text-color-primary{
+  color: #4B171F;
+}
+.text-color-secondary{
+  color:var(--secondary-color)
+}
+
+
+.content-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.separator{
+  flex-grow: 1;
+}
+
+.imgCardExtraSmall{
+  width: 15%;
+  height: auto;
+  align-self: center;
+}
+.imgCardSmall{
+  width: 20%;
+  height: auto;
+  align-self: center;
+}
+.imgCardMedium{
+  width: 75%;
+  height: auto;
+  align-self: center;
+}
+.imgCardSemiSmall{
+  width: 50%;
+  height: auto;
+  align-self: center;
+}
+.imgAvatar{
+  border-radius: 50%;
+}
+

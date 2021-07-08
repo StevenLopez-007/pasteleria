@@ -1,0 +1,30 @@
+<div class="navBar navBarSticky" [style.background]="bgColor">
+  <div class="container py-4 d-flex">
+    <h2 [style.color]="menuIconAndNameColor" class="dancingB"><i style="cursor: pointer;" (click)="openSideBar()" class="fas fa-bars"></i> &nbsp; CupcakeSweet</h2>
+    <div class="separator"></div>
+    <ul class=" hidden-sm-down d-flex flex-row menu">
+      <li>Inicio</li>
+      <li>Cupcakes</li>
+      <li>About</li>
+      <li id="line">|</li>
+      <li>Iniciar Sesión</li>
+    </ul>
+  </div>
+</div>
+
+<div class="container-fluid sideBar" #sideBar [style]="{display:showSideBar?'block':'none'}">
+  <div class="row" style="height:100%">
+    <div class="col-9 p-4 menuSideBar bg-secondary-per" #menuSideBar>
+      <div class="d-flex justify-content-between">
+        <h2 class="dancingB text-white">CupcakeSweet</h2>
+        <span><i (click)="closeSideBar()" class="fas fa-times" style="cursor: pointer; color: white; font-size: 1.75rem;"></i></span>
+      </div>
+      <ul>
+        <li>Inicio</li>
+        <li>Cupcakes</li>
+        <li>About</li>
+        <li>Iniciar Sesión</li>
+      </ul>
+    </div>
+  </div>
+</div>
