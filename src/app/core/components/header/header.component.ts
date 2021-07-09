@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +8,7 @@ import { fromEvent, Subscription } from 'rxjs';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements AfterViewInit,OnDestroy {
+  name:string = environment.name;
 
   @Input()bgColor :string = "#FEECEC";
   @Input()menuIconAndNameColor :string="#DC8AA0"

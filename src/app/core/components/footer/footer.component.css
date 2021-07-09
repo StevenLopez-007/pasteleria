@@ -1,0 +1,30 @@
+/* Footer */
+.footer .footerList ul{
+  list-style: none;
+  color: white;
+  font-family: "Sarabun Medium";
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+}
+.footer .footerList .redes li{
+  font-size: 1.5rem;
+}
+.footer .footerList ul li{
+  margin: 0 0.75rem;
+  cursor: pointer;
+}
+
+@media screen and (max-width:992px){
+  .footer .footerList ul{
+    flex-direction: column;
+    margin: .75rem 0;
+    list-style: circle;
+  }
+  .footer .footerList .redes{
+    flex-direction: row;
+    margin: .75rem 0;
+    list-style: none;
+  }
+}

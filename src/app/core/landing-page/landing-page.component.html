@@ -77,7 +77,7 @@
       <div class="hidden-sm-down row row-cols-xl-4 row-cols-lg-4 row-cols-md-3 mt-5">
         <div class="col mt-md-4 " *ngFor="let cp of cupcakesWeekSpecials">
           <div class="card my-xl my-lg-4 bg-transparent-per" style="border:none;">
-            <img [src]="cp.img" class="imgCardMedium" alt="Pastelera">
+            <img [src]="cp.img" class="imgCardMedium lazyload" alt="Pastelera">
             <div class="card-body text-center content-center flex-column">
               <h5 class="text-center card-title sarabunB">{{cp.name}}</h5>
               <p class="sarabunM text-center card-text text-color-secondary">$ {{cp.price}}</p>
@@ -266,33 +266,5 @@
       </svg></div>
   </div>
 
-  <!-- Seccion 8 -->
-  <div class="container-fluid bg-secondary-per p-0 footer" >
-    <div class="container">
-      <div class="row">
-        <div class="col-xl-2 col-lg-2 col-12">
-          <h2 class="text-xl-start text-lg-start text-center dancingB text-white">CupcakeSweet</h2>
-        </div>
-        <div class="my-md-3 col-xl-10 col-lg-10 col-12 content-center footerList flex-md-column flex-sm-column flex-column">
-          <ul>
-            <li>Sobre nosotros</li>
-            <li>Contáctanos</li>
-            <li>¿Quienes somos?</li>
-            <li>FeedBack</li>
-            <li>Servicios</li>
-          </ul>
-
-          <ul class="redes justify-content-md-between justify-content-sm-betweenjustify-content-between">
-            <li><i class="fab fa-facebook"></i></li>
-            <li><i class="fab fa-twitter"></i></li>
-            <li><i class="fab fa-pinterest"></i></li>
-            <li><i class="fab fa-tumblr"></i></li>
-          </ul>
-        </div>
-        <hr style="color: white;">
-        <div class="col-xl-12">
-          <h6 class="sarabunM text-white text-center">Creado por <strong>Steven López</strong> | &copy; {{date}} Todos los derechos reservados. </h6>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Footer -->
+  <app-footer></app-footer>

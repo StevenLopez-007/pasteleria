@@ -95,23 +95,6 @@ header .seccion1{
   margin-top: -7rem;
 }
 
-/* Footer */
-.footer .footerList ul{
-  list-style: none;
-  color: white;
-  font-family: "Sarabun Medium";
-  display: flex;
-  flex-direction: row;
-  margin: 0;
-  padding: 0;
-}
-.footer .footerList .redes li{
-  font-size: 1.5rem;
-}
-.footer .footerList ul li{
-  margin: 0 0.75rem;
-  cursor: pointer;
-}
 
 /* Large */
 @media screen and (max-width:992px){
@@ -129,6 +112,9 @@ header .seccion1{
   .seccion3 .card{
     height: 100%;
   }
+  .imgSeccion7{
+    margin-top: -5.5rem;
+  }
 
   .imgSeccion4,.imgSeccion6,.imgSeccion7{
     height: 10rem;
@@ -136,17 +122,6 @@ header .seccion1{
   }
   .seccion5 .container{
     margin-top: -110px;
-  }
-
-  .footer .footerList ul{
-    flex-direction: column;
-    margin: .75rem 0;
-    list-style: circle;
-  }
-  .footer .footerList .redes{
-    flex-direction: row;
-    margin: .75rem 0;
-    list-style: none;
   }
 }
 
@@ -168,17 +143,24 @@ header .seccion1{
 
 @media screen and (max-width:576px){
   header{
-    padding-top: 85%;
+    padding-top: 90%;
   }
   header h1{
     font-size: 1.25rem;
   }
 
+  .seccion3{
+    margin-top: 0.5rem;
+  }
   .seccion2 h3{
     font-size: 1.75rem;
   }
   .seccion5 .container{
     margin-top: -80px;
+  }
+
+  .seccion1 .button-seccion1{
+    width: 100%;
   }
 
 }

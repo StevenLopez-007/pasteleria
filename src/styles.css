@@ -63,7 +63,17 @@
   --tertiary-color:#FFF5F6;
   --cuartary-color:#f5dede;
 
+  --bg-input1:#F6F8FB;
+
   --primary-color-button:#C00908;
+  --button-color-auth:#FFDAC2;
+
+  --boxshadow-color1:#FFA66D;
+}
+
+body,html{
+  height: 100%;
+  width: 100%;
 }
 
 .bg-primary-per{
@@ -123,3 +133,12 @@
   border-radius: 50%;
 }
 
+.full-screen{
+  width: 100%;
+  height: 100%;
+}
+
+.boxshadow-none{
+  box-shadow: none !important;
+  border: none !important;
+}

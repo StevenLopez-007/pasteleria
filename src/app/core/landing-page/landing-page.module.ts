@@ -5,6 +5,7 @@ import { LandingPageRoutingModule } from './landing-page-routing.module';
 import { LandingPageComponent } from './landing-page.component';
 import { ComponentsModule } from '../components/components.module';
 import { SwiperModule } from 'swiper/angular';
+import { DirectivesModule } from '../../directives/directives.module';
 
 @NgModule({
   declarations: [LandingPageComponent],
@@ -12,7 +13,8 @@ import { SwiperModule } from 'swiper/angular';
     CommonModule,
     LandingPageRoutingModule,
     ComponentsModule,
-    SwiperModule
+    SwiperModule,
+    DirectivesModule
   ]
 })
 export class LandingPageModule { }

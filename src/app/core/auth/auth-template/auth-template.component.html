@@ -1,0 +1,18 @@
+<div class="container-fluid content-center bg-primary-per full-screen fContainer">
+  <div class="container-fluid mx-5 containerAll" [class]="breakpoint()<576?'full-screen':''">
+    <div class="row" [class]="breakpoint() <992?'boxshadow-none':''">
+      <div class="col-xl-5 col-lg-5 bg-white column" [class]="breakpoint()<576?'content-center':''">
+        <div class="container">
+          <div *ngIf="breakpoint() <992" class="text-center mb-2"><img src="/assets/logo.svg" alt="Logo" class="imgCardSmall"></div>
+          <h1 class="dancingB text-color-primary text-center">CupcakeSweet</h1>
+          <ng-content select="[formAuth]"></ng-content>
+        </div>
+        <span class="sarabunB hidden-lg-up" [routerLink]="linkSpan">{{nameSpan}}</span>
+      </div>
+      <div class="col-xl-5 col-lg-5 bg-primary-per column" *ngIf="breakpoint() >992">
+       <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>
+

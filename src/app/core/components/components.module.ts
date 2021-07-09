@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { LandscapeComponent } from './landscape/landscape.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent],
+  declarations: [HeaderComponent, FooterComponent, LandscapeComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
-  exports:[HeaderComponent]
+  exports:[HeaderComponent,FooterComponent,LandscapeComponent]
 })
 export class ComponentsModule { }

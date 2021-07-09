@@ -1,13 +1,13 @@
-<div class="navBar navBarSticky" [style.background]="bgColor">
-  <div class="container py-4 d-flex">
-    <h2 [style.color]="menuIconAndNameColor" class="dancingB"><i style="cursor: pointer;" (click)="openSideBar()" class="fas fa-bars"></i> &nbsp; CupcakeSweet</h2>
+<div class="navBar navBarSticky pb-3" [style.background]="bgColor">
+  <div class="container content-center py-2 d-flex">
+    <h2 [style.color]="menuIconAndNameColor" class="dancingB m-0"><i style="cursor: pointer;" (click)="openSideBar()" class="fas fa-bars hidden-md-up"></i> &nbsp; {{name}}</h2>
     <div class="separator"></div>
-    <ul class=" hidden-sm-down d-flex flex-row menu">
+    <ul class="hidden-sm-down d-flex flex-row menu m-0">
       <li>Inicio</li>
       <li>Cupcakes</li>
       <li>About</li>
       <li id="line">|</li>
-      <li>Iniciar Sesión</li>
+      <li routerLink="/login">Iniciar Sesión</li>
     </ul>
   </div>
 </div>
@@ -23,7 +23,7 @@
         <li>Inicio</li>
         <li>Cupcakes</li>
         <li>About</li>
-        <li>Iniciar Sesión</li>
+        <li routerLink="/login">Iniciar Sesión</li>
       </ul>
     </div>
   </div>
