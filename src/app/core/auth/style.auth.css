@@ -14,6 +14,10 @@ form input{
   transition: 0.25s;
   outline: none;
 }
+.divInput{
+  background-color: var(--bg-input1);
+  border-radius: 10px;
+}
 form div{
   width: 100%;
 }

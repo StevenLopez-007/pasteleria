@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="container-fluid content-center full-screen bg-primary-per">
+    <div class="row full-screen content-center" >
+      <div class="col-xl-6 col-lg-8 col-md-9 col-sm-12 col-12">
+        <div class="card bg-white py-4 px-2" style="width: 100%;">
+          <div class="card-body">
+            <h5 class="card-title sarabunB">Verificación del correo electronico</h5>
+            <!-- <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6> -->
+            <p class="card-text sarabunM my-4">Se ha enviado un correo para que puedas verificar tu E-mail.</p>
+            <div class="d-flex justify-content-between flex-column flex-sm-row">
+              <button class="btn btn-success text-white sarabunM" (click)="checkedEmail()">Ya verifiqué mi E-mail</button>
+              <button class="btn btn-dark text-white sarabunM my-3 my-sm-0" (click)="reSendEmail()">Reenviar correo de verificación</button>
+              <button class="btn btn-info text-white sarabunM" routerLink="/login">Volver</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

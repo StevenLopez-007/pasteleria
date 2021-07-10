@@ -3,7 +3,7 @@
     <div class="row" [class]="breakpoint() <992?'boxshadow-none':''">
       <div class="col-xl-5 col-lg-5 bg-white column" [class]="breakpoint()<576?'content-center':''">
         <div class="container">
-          <div *ngIf="breakpoint() <992" class="text-center mb-2"><img src="/assets/logo.svg" alt="Logo" class="imgCardSmall"></div>
+          <div *ngIf="breakpoint() <992" class="text-center mb-2 cursor-pointer" routerLink="/"><img src="/assets/logo.svg" alt="Logo" class="imgCardSmall"></div>
           <h1 class="dancingB text-color-primary text-center">CupcakeSweet</h1>
           <ng-content select="[formAuth]"></ng-content>
         </div>

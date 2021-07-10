@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "cupcakesweet-fd4d6": {
+      "hosting": {
+        "pasteleria": [
+          "cupcakesweet-fd4d6"
+        ]
+      }
+    }
+  }
+}
