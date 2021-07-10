@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../auth.service';
-import { Observable, fromEvent, Subject } from 'rxjs';
-import {exhaustMap, finalize} from 'rxjs/operators';
+import {Subject,EMPTY } from 'rxjs';
+import {catchError, exhaustMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   showPassword:boolean = false;
 
   loginForm:FormGroup;
-  loading:boolean=false;
+
   formSubmit:boolean =false;
 
   constructor(private formBuilder: FormBuilder,private authService: AuthService) { }
@@ -26,31 +26,38 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(4)]]
+      password:['',[Validators.required,Validators.minLength(6)]]
     });
 
-    this.clicks$.pipe(
-      exhaustMap(async ()=>{
-        return await this.authService.login(this.loginForm.value)
-      }),
-      finalize(()=>this.loading=false)
-    ).subscribe();
-
+    this.login();
   }
 
   get loginFormControls(){
     return this.loginForm.controls
   }
 
-  async login(){
+  async submitLogin(){
     this.formSubmit=true;
     if(this.loginForm.valid){
-      this.loading=true;
-      // await this.authService.login(this.loginForm.value);
       this.clicks$.next(true);
-      // this.loading=false;
     }
+  }
 
+  login(){
+    this.clicks$.pipe(
+      exhaustMap(async ()=>{
+        return await this.authService.login(this.loginForm.value)
+      }),
+      catchError((e)=>{
+        this.loginForm.get('password').reset();
+        this.login();
+        return EMPTY;
+      })
+    ).subscribe();
+  }
+
+  async resetPassword(){
+    this.authService.resetPassword();
   }
 
 }

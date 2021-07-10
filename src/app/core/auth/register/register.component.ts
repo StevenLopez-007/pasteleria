@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { exhaustMap, finalize } from 'rxjs/operators';
+import { EMPTY, Subject } from 'rxjs';
+import { catchError, exhaustMap, finalize } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../auth.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-register',
@@ -19,34 +20,45 @@ export class RegisterComponent implements OnInit {
   name:string = environment.name;
 
   registerForm:FormGroup;
-  loading:boolean=false;
+
   formSubmit:boolean =false;
-  constructor(private formBuilder: FormBuilder,private authService: AuthService) { }
+  constructor(private formBuilder: FormBuilder,private authService: AuthService,private ngxSpinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
       email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(4)]]
+      password:['',[Validators.required,Validators.minLength(6)]]
     });
 
-    this.clicks$.pipe(
-      exhaustMap(async ()=>{
-        return await this.authService.login(this.registerForm.value)
-      }),
-      finalize(()=>this.loading=false)
-    ).subscribe();
+    this.register();
   }
 
   get registerFormControls(){
     return this.registerForm.controls
   }
 
-  async register(){
+  async submitRegister(){
     this.formSubmit=true;
+    this.ngxSpinnerService.show();
     if(this.registerForm.valid){
-      this.loading =true;
       this.clicks$.next(true);
     }
+  }
+
+  register(){
+    this.clicks$.pipe(
+      exhaustMap(async ()=>{
+        return await this.authService.login(this.registerForm.value)
+      }),
+      catchError((e)=>{
+        this.registerForm.get('password').reset();
+        this.register();
+        return EMPTY;
+      }),
+      finalize(()=>{
+        this.ngxSpinnerService.hide();
+      })
+    ).subscribe();
   }
 
 }

@@ -1,17 +1,26 @@
-.row{
+.row {
   /* box-shadow: 18px 0px 25px -8px rgba(254,166,114,1),8px 0px 8px 0px rgba(254,166,114,1); */
   /* box-shadow: 0 0 20px rgba(254,166,114,1);
   clip-path: inset(0px -20px 0px 0px);*/
-  border-right: 2px solid rgb(254,166,114,1);
-  border-bottom: 2px solid rgb(254,166,114,1);
-  box-shadow:  10px 10px 15px -5px rgb(254,166,114,1);
+  border-right: 2px solid rgb(254, 166, 114, 1);
+  border-bottom: 2px solid rgb(254, 166, 114, 1);
+  box-shadow: 10px 10px 15px -5px rgb(254, 166, 114, 1);
+  width: 80%;
 }
 
-.column{
+.column {
   padding: 10% 0;
 }
 
-span{
+.fContainer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+span {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -21,23 +30,33 @@ span{
   text-decoration: underline;
   cursor: pointer;
 }
+.containerAll {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-@media screen and (max-width:992px){
-  .column{
+@media screen and (max-width: 992px) {
+  .column {
     position: relative;
+  }
+  .containerAll {
+    display: block;
+  }
+  .row {
+    width: auto;
   }
 }
 
-@media screen and (max-width:576px){
-  .row{
+@media screen and (max-width: 576px) {
+  .row {
     height: 100%;
-
   }
-  .containerAll{
+  .containerAll {
     margin: 0 !important;
   }
 
-  .fContainer{
+  .fContainer {
     padding: 0 !important;
   }
 }
