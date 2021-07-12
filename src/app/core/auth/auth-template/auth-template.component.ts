@@ -1,4 +1,5 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-auth-template',
@@ -8,7 +9,7 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 export class AuthTemplateComponent implements OnInit {
   @Input() linkSpan:string;
   @Input() nameSpan:string;
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -16,6 +17,14 @@ export class AuthTemplateComponent implements OnInit {
   @HostListener('window:onresize')
   breakpoint(){
     return window.innerWidth;
+  }
+
+  loginWithGoogle(){
+    this.authService.loginWithGoogle();
+  }
+
+  loginWithFacebook(){
+    this.authService.loginWithFacebook();
   }
 
 }

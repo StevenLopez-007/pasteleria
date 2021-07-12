@@ -1,4 +1,4 @@
-<app-auth-template [linkSpan]="'/register'" [nameSpan]="'Registrarse'">
+<app-auth-template [linkSpan]="'/register'" [nameSpan]="'¿No tienes una cuenta?, registrate'">
   <form formAuth class=" d-flex flex-column align-items-start full-screen" [formGroup]="loginForm" (submit)="submitLogin()">
     <label [class]="formSubmit &&loginFormControls.email.errors?'text-danger':''">{{
       loginFormControls.email.errors?.email && formSubmit?'Ingrese un E-mail válido':'Correo Electrónico'
@@ -9,8 +9,8 @@
       <input #inputPassword [type]="showPassword?'text':'password'" formControlName="password" inputmode="email">
       <i (click)="(showPassword = !showPassword);inputPassword.focus()" class="mx-2 cursor-pointer" [class]="showPassword?'fas fa-eye-slash':'fas fa-eye'"></i>
     </div>
-    <div class="mt-3 d-inline-flex justify-content-between">
-      <label (click)="resetPassword()" style="text-decoration: underline; cursor: pointer;">Olvidé mi contraseña</label>
+    <div class="mt-4 d-inline-flex justify-content-between flex-sm-row flex-column-reverse">
+      <label class="mt-3 m-sm-0 text-sm-start text-center" (click)="resetPassword()" style="text-decoration: underline; cursor: pointer;">Olvidé mi contraseña</label>
       <button type="submit">Ingresar</button>
     </div>
   </form>
@@ -20,7 +20,7 @@
     <h2 class="sarabunB">Inicio de sesión</h2>
     <h4 class="sarabunM">¿No tienes una cuenta?, registrate</h4>
     <div class="mt-5">
-      <button type="button" class="buttonLR sarabunB" routerLink="/register">Registrarse.</button>
+      <button type="button" class="buttonLR sarabunB" routerLink="/register" [skipLocationChange]="true">Registrate.</button>
     </div>
   </div>
 </app-auth-template>

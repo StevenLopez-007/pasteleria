@@ -6,10 +6,17 @@
           <div *ngIf="breakpoint() <992" class="text-center mb-2 cursor-pointer" routerLink="/"><img src="/assets/logo.svg" alt="Logo" class="imgCardSmall"></div>
           <h1 class="dancingB text-color-primary text-center">CupcakeSweet</h1>
           <ng-content select="[formAuth]"></ng-content>
+          <div class="mt-2 mt-sm-4 text-center">
+            <h5 class="sarabunB">Ingresar o registrarse con:</h5>
+            <div class="my-3 d-grid">
+              <button type="button" (click)="loginWithGoogle()" class="btn my-3 btn-google sarabunM btnSocial"><i class="fab fa-google"></i> Google</button>
+              <button type="button" (click)="loginWithFacebook()" class="btn btn-facebook sarabunM btnSocial"><i class="fab fa-facebook"></i> Facebook</button>
+            </div>
+          </div>
         </div>
-        <span class="sarabunB hidden-lg-up" [routerLink]="linkSpan">{{nameSpan}}</span>
+        <span class="sarabunB hidden-lg-up" [routerLink]="linkSpan" [skipLocationChange]="true">{{nameSpan}}</span>
       </div>
-      <div class="col-xl-5 col-lg-5 bg-primary-per column" *ngIf="breakpoint() >992">
+      <div class="col-xl-5 col-lg-5 bg-primary-per column content-center ms-3" *ngIf="breakpoint() >992">
        <ng-content></ng-content>
       </div>
     </div>

@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { RegisterAndLogin } from './interfaces/registerAndLogin';
 import { SwalService } from '../../services/swal.service';
-import * as fb from 'firebase';
+import * as fb from 'firebase/app';
 import { getMsgError } from 'src/app/class/error.class';
 import { NgxSpinnerService } from 'ngx-spinner';
 
@@ -52,6 +52,31 @@ export class AuthService {
     }
   }
 
+  async loginWithGoogle(){
+    try{
+      await this.ngxSpinnerService.show();
+      await this.angularFireAuth.signInWithPopup(new fb.default.auth.GoogleAuthProvider());
+      await this.ngxSpinnerService.hide();
+      this.router.navigateByUrl('/home');
+    }catch(e){
+      this.handleError(e.code);
+      await this.ngxSpinnerService.hide();
+    }
+  }
+
+  async loginWithFacebook(){
+    try {
+        await this.ngxSpinnerService.show();
+        await this.angularFireAuth.signInWithPopup(new fb.default.auth.FacebookAuthProvider());
+        await this.ngxSpinnerService.hide();
+        this.router.navigateByUrl('/home');
+    } catch (e:any) {
+        this.handleError(e.code,e.email);
+        await this.ngxSpinnerService.hide();
+    }
+  }
+
+
   async checkedEmail(): Promise<void> {
     try {
       let currentUser = await this.getcurrentUser();
@@ -99,8 +124,8 @@ export class AuthService {
     return this.angularFireAuth.currentUser;
   }
 
-  handleError(code:string){
-    const msg = getMsgError(code);
+  handleError(code:string,args?:any){
+    const msg = getMsgError(code,args);
     this.swalService.alertErrorLogin(msg);
   }
 }

@@ -25,11 +25,8 @@ export class RegisterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private authService: AuthService,private ngxSpinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.registerForm = this.formBuilder.group({
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(6)]]
-    });
-
+    document.title = `${environment.name} - Creación de cuenta`
+    this.configRegisterForm();
     this.register();
   }
 
@@ -59,6 +56,13 @@ export class RegisterComponent implements OnInit {
         this.ngxSpinnerService.hide();
       })
     ).subscribe();
+  }
+
+  configRegisterForm(){
+    this.registerForm = this.formBuilder.group({
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.minLength(6)]]
+    });
   }
 
 }

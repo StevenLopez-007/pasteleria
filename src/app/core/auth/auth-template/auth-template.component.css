@@ -1,15 +1,18 @@
 .row {
-  /* box-shadow: 18px 0px 25px -8px rgba(254,166,114,1),8px 0px 8px 0px rgba(254,166,114,1); */
-  /* box-shadow: 0 0 20px rgba(254,166,114,1);
-  clip-path: inset(0px -20px 0px 0px);*/
   border-right: 2px solid rgb(254, 166, 114, 1);
   border-bottom: 2px solid rgb(254, 166, 114, 1);
   box-shadow: 10px 10px 15px -5px rgb(254, 166, 114, 1);
   width: 80%;
 }
-
+.btnSocial{
+  font-size: 1.25rem;
+  border-radius: 15px;
+}
+.btnSocial:hover{
+  color: white !important;
+}
 .column {
-  padding: 10% 0;
+  padding: 6% 0;
 }
 
 .fContainer {

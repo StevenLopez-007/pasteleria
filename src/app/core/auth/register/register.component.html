@@ -1,4 +1,4 @@
-<app-auth-template [linkSpan]="'/login'" [nameSpan]="'Iniciar sesión'">
+<app-auth-template [linkSpan]="'/login'" [nameSpan]="'¿Ya tienes una cuenta?, inicia sesión'">
   <form formAuth class=" d-flex flex-column align-items-start full-screen" [formGroup]="registerForm" (submit)="submitRegister()">
     <label [class]="formSubmit &&registerFormControls.email.errors?'text-danger':''">{{
       registerFormControls.email.errors?.email && formSubmit?'Ingrese un E-mail válido':'Correo Electrónico'
@@ -20,7 +20,7 @@
     <h2 class="sarabunB">Creación de cuenta</h2>
     <h4 class="sarabunM">¿Ya tienes una cuenta?, inicia sesión</h4>
     <div class="mt-5">
-      <button type="button" class="buttonLR sarabunB" routerLink="/login">Iniciar sesión.</button>
+      <button type="button" class="buttonLR sarabunB" routerLink="/login" [skipLocationChange]="true">Iniciar sesión.</button>
     </div>
   </div>
 </app-auth-template>

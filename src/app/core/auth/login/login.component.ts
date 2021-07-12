@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 import { AuthService } from '../auth.service';
@@ -24,11 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(6)]]
-    });
-
+    document.title = `${environment.name} - Inicio de sesión`;
+    this.configFormLogin();
     this.login();
   }
 
@@ -58,6 +55,13 @@ export class LoginComponent implements OnInit {
 
   async resetPassword(){
     this.authService.resetPassword();
+  }
+
+  configFormLogin(){
+    this.loginForm = this.formBuilder.group({
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.minLength(6)]]
+    });
   }
 
 }

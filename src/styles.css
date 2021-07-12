@@ -67,6 +67,8 @@
 
   --primary-color-button:#C00908;
   --button-color-auth:#FFDAC2;
+  --button-color-google:#3878E6;
+  --button-color-facebook:#3A588F;
 
   --boxshadow-color1:#FFA66D;
 }
@@ -76,6 +78,15 @@ body,html{
   width: 100%;
 }
 
+.btn-google{
+  background-color: var(--button-color-google);
+  color: white;
+}
+
+.btn-facebook{
+  background-color: var(--button-color-facebook);
+  color: white;
+}
 .bg-primary-per{
   background-color: var(--primery-color);
 }
