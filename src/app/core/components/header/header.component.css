@@ -48,3 +48,17 @@ li{
   top:0;
   z-index: 500;
 }
+.navBar ul li:last-child{
+  position: relative;
+}
+
+.navBar ul li:last-child::before{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 2px;
+  height: 60%;
+  background-color: #212529;
+  left: 0;
+
+}

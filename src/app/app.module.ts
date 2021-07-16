@@ -13,11 +13,13 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './core/pages/pages.module';
 import { environment } from '../environments/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { PhotoUrlPipe } from './pipes/photo-url.pipe';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PhotoUrlPipe
   ],
   imports: [
     BrowserModule,

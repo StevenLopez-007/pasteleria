@@ -1,13 +1,12 @@
-<div class="navBar navBarSticky pb-3" [style.background]="bgColor">
+<div class="navBar navBarSticky" [style.background]="bgColor">
   <div class="container content-center py-2 d-flex">
     <h2 [style.color]="menuIconAndNameColor" class="dancingB m-0"><i style="cursor: pointer;" (click)="openSideBar()" class="fas fa-bars hidden-md-up"></i> &nbsp; {{name}}</h2>
     <div class="separator"></div>
     <ul class="hidden-sm-down d-flex flex-row menu m-0">
-      <li routerLink="/">Pagina Principal</li>
-      <li routerLink="/dashboard">Inicio</li>
-      <li>About</li>
-      <li id="line">|</li>
-      <li routerLink="/login">Iniciar Sesión</li>
+      <li *ngFor="let router of headerRoutes" [routerLink]="[router.url]">
+        {{router.name}}
+      </li>
+      <ng-content></ng-content>
     </ul>
   </div>
 </div>
@@ -20,10 +19,9 @@
         <span><i (click)="closeSideBar()" class="fas fa-times" style="cursor: pointer; color: white; font-size: 1.75rem;"></i></span>
       </div>
       <ul>
-        <li routerLink="/">Pagina Principal</li>
-        <li routerLink="/dashboard">Inicio</li>
-        <li>About</li>
-        <li routerLink="/login">Iniciar Sesión</li>
+        <li *ngFor="let router of headerRoutes" [routerLink]="[router.url]">
+          {{router.name}}
+        </li>
       </ul>
     </div>
   </div>

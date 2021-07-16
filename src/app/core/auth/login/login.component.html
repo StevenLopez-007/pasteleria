@@ -3,7 +3,7 @@
     <label [class]="formSubmit &&loginFormControls.email.errors?'text-danger':''">{{
       loginFormControls.email.errors?.email && formSubmit?'Ingrese un E-mail válido':'Correo Electrónico'
     }}</label>
-    <input type="email" formControlName="email" inputmode="email">
+    <input autocomplete="on" type="email" formControlName="email" inputmode="email">
     <label [class]="formSubmit &&loginFormControls.password.errors?'text-danger':''">{{ loginFormControls.password.errors?.minlength && formSubmit?'Contreseña muy corta':'Contraseña'}}</label>
     <div class="d-flex align-items-center divInput">
       <input #inputPassword [type]="showPassword?'text':'password'" formControlName="password" inputmode="email">

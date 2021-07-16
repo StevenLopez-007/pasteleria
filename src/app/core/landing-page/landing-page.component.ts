@@ -2,6 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { WeekSpecial } from '../../interfaces/cp-weekspecial';
 
 import SwiperCore,{Pagination} from 'swiper/core';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { first, map } from 'rxjs/operators';
 
 SwiperCore.use([Pagination])
 @Component({
@@ -13,48 +15,49 @@ export class LandingPageComponent implements OnInit {
 
   breakPoint:number;
   date=new Date().getFullYear();
-  cupcakesWeekSpecials:WeekSpecial[]=[
-    {
-      img:'/assets/lpImages/week_specials/cp1.png',
-      name:'Ocean Perla',
-      price:2.5
-    },
-    {
-      img:'/assets/lpImages/week_specials/cp2.png',
-      name:'Rosa primavera',
-      price:1.55
-    },
-    {
-      img:'/assets/lpImages/week_specials/cp3.png',
-      name:'Nube blanca',
-      price:2
-    },
-    {
-      img:'/assets/lpImages/week_specials/cp4.png',
-      name:'Explosión de texturas',
-      price:3.75
-    },
-    {
-      img:'/assets/lpImages/week_specials/cp5.png',
-      name:"Chocolate's",
-      price:1.25
-    },
-    {
-      img:'/assets/lpImages/week_specials/cp6.png',
-      name:"Nieve's purpura",
-      price:2.25
-    },
-    {
-      img:'/assets/lpImages/week_specials/cp7.png',
-      name:"Mountain mora",
-      price:3.5
-    },
-    {
-      img:'/assets/lpImages/week_specials/cp8.png',
-      name:'Chispitas',
-      price:1
-    },
-  ]
+  // cupcakesWeekSpecials:WeekSpecial[]=[
+  //   {
+  //     img:'/assets/lpImages/week_specials/cp1.png',
+  //     name:'Ocean Perla',
+  //     price:2.5
+  //   },
+  //   {
+  //     img:'/assets/lpImages/week_specials/cp2.png',
+  //     name:'Rosa primavera',
+  //     price:1.55
+  //   },
+  //   {
+  //     img:'/assets/lpImages/week_specials/cp3.png',
+  //     name:'Nube blanca',
+  //     price:2
+  //   },
+  //   {
+  //     img:'/assets/lpImages/week_specials/cp4.png',
+  //     name:'Explosión de texturas',
+  //     price:3.75
+  //   },
+  //   {
+  //     img:'/assets/lpImages/week_specials/cp5.png',
+  //     name:"Chocolate's",
+  //     price:1.25
+  //   },
+  //   {
+  //     img:'/assets/lpImages/week_specials/cp6.png',
+  //     name:"Nieve's purpura",
+  //     price:2.25
+  //   },
+  //   {
+  //     img:'/assets/lpImages/week_specials/cp7.png',
+  //     name:"Mountain mora",
+  //     price:3.5
+  //   },
+  //   {
+  //     img:'/assets/lpImages/week_specials/cp8.png',
+  //     name:'Chispitas',
+  //     price:1
+  //   },
+  // ]
+  cupcakesWeekSpecials:WeekSpecial[]=[];
 
   galleryImages:string[]=[
     "https://images.unsplash.com/photo-1519869325930-281384150729?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Y3VwY2FrZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
@@ -69,10 +72,11 @@ export class LandingPageComponent implements OnInit {
     "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzF8fGN1cGNha2VzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
   ]
 
-  constructor() { }
+  constructor(private angularFirestore: AngularFirestore) { }
 
   ngOnInit(): void {
     this.setBreakPoint();
+    this.getSpecialsWeek();
   }
 
   @HostListener('window:resize')
@@ -95,6 +99,23 @@ export class LandingPageComponent implements OnInit {
 
   setBreakPoint(){
     this.breakPoint = window.innerWidth;
+  }
+
+  getSpecialsWeek(){
+    this.angularFirestore.collection('week_specials').valueChanges()
+    .pipe(
+      map((resp:any)=>resp[0].cupcakes)
+    )
+    .subscribe((resp:any[])=>{
+      const weekSpecials = []
+      resp.map(async(cupcakes,index,array)=>{
+        const cupcake = await cupcakes.get();
+        weekSpecials.push(cupcake.data())
+        if(array.length-1 == index){
+          this.cupcakesWeekSpecials = weekSpecials;
+        }
+      });
+    });
   }
 
 }

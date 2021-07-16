@@ -1,13 +1,15 @@
 import { AfterViewInit, Component, ElementRef, HostListener, Input, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderRoutes } from '../../../interfaces/header-routes';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements AfterViewInit,OnDestroy {
+export class HeaderComponent implements OnInit, AfterViewInit,OnDestroy {
   name:string = environment.name;
 
   @Input()bgColor :string = "#FEECEC";
@@ -18,8 +20,13 @@ export class HeaderComponent implements AfterViewInit,OnDestroy {
   @ViewChild('menuSideBar',{read:ElementRef}) menuSideBar:ElementRef;
 
   clickOutSideSub:Subscription;
-
-  constructor(private renderer2: Renderer2) { }
+  headerRoutes:HeaderRoutes[]=[];
+  constructor(private renderer2: Renderer2,private activatedRoute: ActivatedRoute,private router: Router) { }
+  ngOnInit(){
+    this.activatedRoute.data.subscribe((data)=>{
+      this.headerRoutes = data.headerRoutes;
+    })
+  }
 
   ngAfterViewInit(){
     this.clickOutSide();

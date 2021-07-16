@@ -9,7 +9,7 @@
       <input #inputPassword [type]="showPassword?'text':'password'" formControlName="password">
       <i (click)="(showPassword = !showPassword); inputPassword.focus()" class="mx-2 cursor-pointer" [class]="showPassword?'fas fa-eye-slash':'fas fa-eye'"></i>
     </div>
-    <div class="mt-3 d-inline-flex justify-content-between">
+    <div class="my-4 d-inline-flex justify-content-between flex-sm-row flex-column-reverse">
       <!-- <label style="text-decoration: underline; cursor: pointer;">Olvidé mi contraseña</label> -->
       <button type="submit">Registrarse</button>
     </div>

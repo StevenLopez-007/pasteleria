@@ -1,0 +1,21 @@
+<li>
+  <div class="userInfo" *ngIf="(user|async) as user">
+    <div class="dropdown infoUserNavBar">
+      <img id="dropdownMenuButton1" data-bs-toggle="dropdown" class="dropdown-toggle cursor-pointer" [src]="user.photo"
+        alt="Photo User">
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        <li>
+          <div>
+            <a class="dropdown-item" href="#">
+              <h5 class="sarabunB">{{user.name}}</h5>
+              <h6>{{user.email}}</h6>
+            </a>
+          </div>
+          <hr class="m-0">
+        </li>
+        <li><a class="dropdown-item"><i class="fas fa-cog"></i> Configuración</a></li>
+        <li (click)="signOut()"><a class="dropdown-item cursor-pointer"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </div>
+</li>

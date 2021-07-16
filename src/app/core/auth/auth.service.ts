@@ -6,18 +6,34 @@ import { SwalService } from '../../services/swal.service';
 import * as fb from 'firebase/app';
 import { getMsgError } from 'src/app/class/error.class';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { User } from './interfaces/user';
+import { environment } from '../../../environments/environment';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private user:BehaviorSubject<User> = new BehaviorSubject<User>(null);
+  user$ = this.user.asObservable();
 
   constructor(private angularFireAuth: AngularFireAuth,
     private router: Router,
-    private ngZone: NgZone,
     private swalService: SwalService,
     private ngxSpinnerService: NgxSpinnerService) {
+      this.angularFireAuth.authState.subscribe((userAuth)=>{
+        if(userAuth){
+          const user:User={
+            uid:userAuth.uid,
+            name:userAuth.displayName,
+            email:userAuth.email,
+            photo:userAuth.photoURL || environment.userPhotoDefault
+          };
+          this.user.next(user);
+        }
+      });
   }
+
 
   async register(value: RegisterAndLogin): Promise<void> {
     try {
@@ -59,7 +75,7 @@ export class AuthService {
       await this.ngxSpinnerService.hide();
       this.router.navigateByUrl('/home');
     }catch(e){
-      this.handleError(e.code);
+      this.handleError(e.code,null,'Google');
       await this.ngxSpinnerService.hide();
     }
   }
@@ -71,11 +87,10 @@ export class AuthService {
         await this.ngxSpinnerService.hide();
         this.router.navigateByUrl('/home');
     } catch (e:any) {
-        this.handleError(e.code,e.email);
+        this.handleError(e.code,e.email,'Facebook');
         await this.ngxSpinnerService.hide();
     }
   }
-
 
   async checkedEmail(): Promise<void> {
     try {
@@ -108,24 +123,29 @@ export class AuthService {
     try {
      const email = await this.swalService.emailModal();
      if(!email)return;
+     await this.ngxSpinnerService.show();
      await this.angularFireAuth.sendPasswordResetEmail(email);
+     await this.ngxSpinnerService.hide();
      this.swalService.mixinSwal('success','Se ha enviado un correo electronico para que puedas restablecer tu contraseña.')
     } catch (error) {
+      await this.ngxSpinnerService.show();
       this.handleError(error.code);
+      await this.ngxSpinnerService.hide();
       throw(error)
     }
   }
 
   async signOut() {
     await this.angularFireAuth.signOut();
+    this.router.navigateByUrl('/login')
   }
 
   getcurrentUser() {
     return this.angularFireAuth.currentUser;
   }
 
-  handleError(code:string,args?:any){
-    const msg = getMsgError(code,args);
+  handleError(code:string,args?:any,provider?:string){
+    const msg = getMsgError(code,args,provider);
     this.swalService.alertErrorLogin(msg);
   }
 }

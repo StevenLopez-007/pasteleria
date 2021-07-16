@@ -1,4 +1,4 @@
-export function getMsgError(code:string,args?:any){
+export function getMsgError(code:string,args?:any,provider?:string){
   switch(code){
     case 'auth/wrong-password':{
       return 'Correo ó contraseña incorrecta'
@@ -16,10 +16,10 @@ export function getMsgError(code:string,args?:any){
       return 'Ingresa un E-mail válido.'
     }
     case 'auth/popup-closed-by-user':{
-      return 'Has cerrado la ventana de autenticación de Google'
+      return `Has cerrado la ventana de autenticación de ${provider}`
     }
     case 'auth/account-exists-with-different-credential':{
-      return `Ya existe una cuenta con este correo electronico (${args}), inicia sesión con esa cuenta`
+      return `Ya existe una cuenta con este correo electronico (${args.email}), inicia sesión con esa cuenta`
     }
     default:{
       return 'Ocurrió un error'

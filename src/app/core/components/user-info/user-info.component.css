@@ -1,0 +1,11 @@
+.infoUserNavBar img{
+  width: 40%;
+  border-radius: 50%;
+}
+.infoUserNavBar{
+  text-align: center;
+}
+
+.imgUserList{
+  max-height: 64px;
+}
