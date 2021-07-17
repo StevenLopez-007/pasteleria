@@ -6,7 +6,7 @@
       <li *ngFor="let router of headerRoutes" [routerLink]="[router.url]">
         {{router.name}}
       </li>
-      <ng-content></ng-content>
+      <li><ng-content select="[userInfoNavBar]"></ng-content></li>
     </ul>
   </div>
 </div>
@@ -19,6 +19,7 @@
         <span><i (click)="closeSideBar()" class="fas fa-times" style="cursor: pointer; color: white; font-size: 1.75rem;"></i></span>
       </div>
       <ul>
+        <li><ng-content select="[userInfoSideBar]"></ng-content></li>
         <li *ngFor="let router of headerRoutes" [routerLink]="[router.url]">
           {{router.name}}
         </li>

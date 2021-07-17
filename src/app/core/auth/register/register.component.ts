@@ -36,16 +36,18 @@ export class RegisterComponent implements OnInit {
 
   async submitRegister(){
     this.formSubmit=true;
-    this.ngxSpinnerService.show();
+    await this.ngxSpinnerService.show();
     if(this.registerForm.valid){
       this.clicks$.next(true);
+    }else{
+      await this.ngxSpinnerService.hide()
     }
   }
 
   register(){
     this.clicks$.pipe(
       exhaustMap(async ()=>{
-        return await this.authService.login(this.registerForm.value)
+        return await this.authService.register(this.registerForm.value)
       }),
       catchError((e)=>{
         this.registerForm.get('password').reset();
@@ -60,8 +62,9 @@ export class RegisterComponent implements OnInit {
 
   configRegisterForm(){
     this.registerForm = this.formBuilder.group({
-      email:['',[Validators.required,Validators.email]],
-      password:['',[Validators.required,Validators.minLength(6)]]
+      username:['stevenlopez',[Validators.required,Validators.min(5),Validators.max(10)]],
+      email:['sa_lopez_galvez@hotmail.com',[Validators.required,Validators.email]],
+      password:['123456789',[Validators.required,Validators.minLength(6)]]
     });
   }
 

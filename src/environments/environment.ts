@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   name:'CupcakeSweet',
-  userPhotoDefault:'assets/userPhotoDefault.svg',
+  userPhotoDefault:'https://firebasestorage.googleapis.com/v0/b/cupcakesweet-fd4d6.appspot.com/o/photoUsers%2FuserPhotoDefault.svg?alt=media&token=627d3ad9-bf66-457e-9407-b39e2d889c40',
   firebase:{
     apiKey: "AIzaSyAnGpBR4Zgo_8WjJ8XZ4qwublE2rDd11FE",
     authDomain: "cupcakesweet-fd4d6.firebaseapp.com",

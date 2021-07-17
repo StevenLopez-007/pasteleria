@@ -1,14 +1,21 @@
 <app-auth-template [linkSpan]="'/login'" [nameSpan]="'¿Ya tienes una cuenta?, inicia sesión'">
   <form formAuth class=" d-flex flex-column align-items-start full-screen" [formGroup]="registerForm" (submit)="submitRegister()">
+    <label [class]="formSubmit &&registerFormControls.username.errors?'text-danger':''">{{
+      registerFormControls.username.errors?.required && formSubmit?'Nombre de usuario requerido':'Nombre de usuario'
+    }}</label>
+    <input type="text" formControlName="username">
+
     <label [class]="formSubmit &&registerFormControls.email.errors?'text-danger':''">{{
       registerFormControls.email.errors?.email && formSubmit?'Ingrese un E-mail válido':'Correo Electrónico'
     }}</label>
     <input type="email" formControlName="email" inputmode="email">
+
     <label [class]="formSubmit &&registerFormControls.password.errors?'text-danger':''">{{ registerFormControls.password.errors?.minlength && formSubmit?'Contreseña muy corta':'Contraseña'}}</label>
     <div class="d-flex align-items-center divInput">
       <input #inputPassword [type]="showPassword?'text':'password'" formControlName="password">
       <i (click)="(showPassword = !showPassword); inputPassword.focus()" class="mx-2 cursor-pointer" [class]="showPassword?'fas fa-eye-slash':'fas fa-eye'"></i>
     </div>
+
     <div class="my-4 d-inline-flex justify-content-between flex-sm-row flex-column-reverse">
       <!-- <label style="text-decoration: underline; cursor: pointer;">Olvidé mi contraseña</label> -->
       <button type="submit">Registrarse</button>

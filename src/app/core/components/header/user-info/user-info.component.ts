@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../auth/auth.service';
-import { User } from '../../auth/interfaces/user';
+import { AuthService } from '../../../auth/auth.service';
+import { User } from '../../../auth/interfaces/user';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -16,10 +16,12 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.user$;
+    this.authService.user$.subscribe((resp)=>console.log)
   }
 
   async signOut(){
     await this.authService.signOut();
   }
+
 
 }

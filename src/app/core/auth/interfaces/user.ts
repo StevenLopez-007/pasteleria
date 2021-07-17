@@ -1,6 +1,6 @@
 export interface User{
   uid:string,
   email:string,
-  name?:string,
+  userName?:string,
   photo?:string
 }

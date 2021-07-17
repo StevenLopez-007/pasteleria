@@ -36,6 +36,11 @@ export class HeaderComponent implements OnInit, AfterViewInit,OnDestroy {
     this.clickOutSideSub.unsubscribe();
   }
 
+  @HostListener('window:resize')
+  resize(){
+    return window.innerWidth;
+  }
+
   openSideBar(){
     this.showSideBar = true;
 

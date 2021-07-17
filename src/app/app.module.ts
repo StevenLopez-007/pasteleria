@@ -8,7 +8,7 @@ import { AuthModule } from './core/auth/auth.module';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
-
+import { AngularFireStorageModule,BUCKET } from '@angular/fire/storage';
 import { AppComponent } from './app.component';
 import { PagesModule } from './core/pages/pages.module';
 import { environment } from '../environments/environment';
@@ -31,12 +31,13 @@ import { PhotoUrlPipe } from './pipes/photo-url.pipe';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
 
     ComponentsModule,
     AuthModule,
     PagesModule
   ],
-  providers: [],
+  providers: [{provide:BUCKET,useValue:'cupcakesweet'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

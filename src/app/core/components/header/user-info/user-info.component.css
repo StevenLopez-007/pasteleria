@@ -1,6 +1,7 @@
 .infoUserNavBar img{
-  width: 40%;
+  width: 2rem;
   border-radius: 50%;
+  margin-left: 0.75rem;
 }
 .infoUserNavBar{
   text-align: center;
