@@ -9,10 +9,10 @@ import { getMsgError } from 'src/app/class/error.class';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { User } from './interfaces/user';
 import { environment } from '../../../environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, EMPTY, of } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NewUser } from './interfaces/newUser';
-import { finalize, switchMap } from 'rxjs/operators';
+import { finalize, switchMap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,8 @@ import { finalize, switchMap } from 'rxjs/operators';
 export class AuthService {
   private user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   user$ = this.user.asObservable();
+
+  providersID:string[]=["google.com","facebook.com"];
 
   constructor(private angularFireAuth: AngularFireAuth,
     private router: Router,
@@ -30,7 +32,21 @@ export class AuthService {
 
     this.angularFireAuth.authState.pipe(
       switchMap((userAuth)=>{
-        return this.angularFirestore.collection('users').doc(userAuth.uid).valueChanges();
+        if(userAuth){
+          if(!(this.providersID.includes(userAuth.providerData[0].providerId))){
+            return this.angularFirestore.collection('users').doc(userAuth.uid).valueChanges()
+          }else{
+            const user:User={
+              userName:userAuth.displayName,
+              uid:userAuth.uid,
+              email:userAuth.email,
+              photo:userAuth.photoURL
+            }
+            return of(user);
+          }
+        }else{
+          return EMPTY;
+        }
       })
     ).subscribe((userAuth:User) => {
       if (userAuth) {
@@ -150,6 +166,7 @@ export class AuthService {
 
   async signOut() {
     await this.angularFireAuth.signOut();
+    this.user.next(null);
     this.router.navigateByUrl('/login')
   }
 
