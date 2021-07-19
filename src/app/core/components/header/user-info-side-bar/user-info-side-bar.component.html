@@ -12,7 +12,7 @@
 
       <div class="collapse" id="settings">
         <ul>
-          <li><i class="fas fa-cog"></i> Configuración</li>
+          <li [routerLink]="['/home','edit-profile']"><i class="fas fa-cog"></i> Configuración</li>
           <hr>
           <li (click)="signOut()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</li>
         </ul>

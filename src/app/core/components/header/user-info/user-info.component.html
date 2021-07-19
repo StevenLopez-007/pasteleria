@@ -6,14 +6,14 @@
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
         <li>
           <div>
-            <a class="dropdown-item" href="#">
+            <a class="dropdown-item">
               <h5 class="sarabunB">{{user.userName}}</h5>
               <h6>{{user.email}}</h6>
             </a>
           </div>
           <hr class="m-0">
         </li>
-        <li><a class="dropdown-item"><i class="fas m-2 fa-cog"></i> Configuración</a></li>
+        <li [routerLink]="['/home','edit-profile']"><a class="dropdown-item"><i class="fas m-2 fa-cog"></i> Configuración</a></li>
         <li (click)="signOut()"><a class="dropdown-item cursor-pointer"><i class="fas m-2 fa-sign-out-alt"></i> Cerrar
             Sesión</a></li>
       </ul>

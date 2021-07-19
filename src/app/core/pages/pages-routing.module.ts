@@ -11,14 +11,14 @@ const headerRoutes:HeaderRoutes[]=[
   },
   {
     name:'Inicio',
-    url:'/dashboard'
+    url:'/home'
   }
 ]
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 const routes: Routes = [
   {
-    path:'dashboard',
+    path:'home',
     component:PagesComponent,
     canActivate:[AngularFireAuthGuard],
     data:{authGuardPipe:redirectUnauthorizedToLogin,

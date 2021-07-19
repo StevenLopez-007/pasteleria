@@ -1,0 +1,39 @@
+.profile img {
+  width: 9rem;
+  height: 9rem;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.photoUser {
+  position: relative;
+  overflow: hidden;
+}
+.inputImg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.photoUser button {
+  position: absolute;
+  background-color: var(--primary-color-button);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  padding: 0.5rem;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+}
+
+@media screen and (max-width: 576px) {
+  .profile img {
+    width: 7rem;
+    height: 7rem;
+  }
+}

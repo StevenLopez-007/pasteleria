@@ -1,6 +1,6 @@
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireStorage } from '@angular/fire/storage';
+import { AngularFireStorage} from '@angular/fire/storage';
 import { Router } from '@angular/router';
 import { RegisterAndLogin } from './interfaces/registerAndLogin';
 import { SwalService } from '../../services/swal.service';
@@ -12,7 +12,7 @@ import { environment } from '../../../environments/environment';
 import { BehaviorSubject, Observable, EMPTY, of } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NewUser } from './interfaces/newUser';
-import { finalize, switchMap, catchError } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +21,9 @@ export class AuthService {
   private user: BehaviorSubject<User> = new BehaviorSubject<User>(null);
   user$ = this.user.asObservable();
 
-  providersID:string[]=["google.com","facebook.com"];
+  downloadURLimg$: Observable<string>;
+
+  providersID: string[] = ["google.com", "facebook.com"];
 
   constructor(private angularFireAuth: AngularFireAuth,
     private router: Router,
@@ -31,24 +33,26 @@ export class AuthService {
     private storage: AngularFireStorage) {
 
     this.angularFireAuth.authState.pipe(
-      switchMap((userAuth)=>{
-        if(userAuth){
-          if(!(this.providersID.includes(userAuth.providerData[0].providerId))){
+      switchMap((userAuth) => {
+        if (userAuth) {
+          const provider: string = userAuth.providerData[0].providerId;
+          if (!(this.providersID.includes(provider))) {
             return this.angularFirestore.collection('users').doc(userAuth.uid).valueChanges()
-          }else{
-            const user:User={
-              userName:userAuth.displayName,
-              uid:userAuth.uid,
-              email:userAuth.email,
-              photo:userAuth.photoURL
+          } else {
+            const user: User = {
+              userName: userAuth.displayName,
+              uid: userAuth.uid,
+              email: userAuth.email,
+              photo: userAuth.photoURL,
+              provider: provider
             }
             return of(user);
           }
-        }else{
+        } else {
           return EMPTY;
         }
       })
-    ).subscribe((userAuth:User) => {
+    ).subscribe((userAuth: User) => {
       if (userAuth) {
         this.user.next(userAuth);
       }
@@ -57,9 +61,10 @@ export class AuthService {
 
 
   async register(user: RegisterAndLogin): Promise<void> {
+    let userCredentials: fb.default.auth.UserCredential;
     try {
       await this.ngxSpinnerService.show();
-      const userCredentials = await this.angularFireAuth.createUserWithEmailAndPassword(user.email, user.password);
+      userCredentials = await this.angularFireAuth.createUserWithEmailAndPassword(user.email, user.password);
       (await this.angularFireAuth.currentUser).sendEmailVerification();
 
       const writeUser: NewUser = {
@@ -72,6 +77,7 @@ export class AuthService {
       await this.ngxSpinnerService.hide();
     } catch (error: any) {
       await this.ngxSpinnerService.hide();
+      await userCredentials.user.delete();
       await this.angularFireAuth.signOut();
       this.handleError(error.code);
       throw (error)
@@ -197,21 +203,32 @@ export class AuthService {
     })
   }
 
-  updatePhotoUser(file: File, uid: string) {
-    return new Promise((resolve, reject) => {
-      try {
-        const filePath = `/photoUsers/${uid}`;
-        const fileRef = this.storage.ref(filePath);
+  async uploadPhotoUser(file: File, uid: string) {
 
-        const task = this.storage.upload(filePath, file);
-        let downloadUrl: Observable<string>;
-        task.snapshotChanges().pipe(
-          finalize(() => downloadUrl = fileRef.getDownloadURL())
-        ).subscribe();
-        resolve(downloadUrl);
-      } catch (error) {
-        reject(error);
-      }
-    });
+    try {
+      await this.ngxSpinnerService.show();
+      const filePath = `/photoUsers/${uid}`;
+      const fileRef = this.storage.ref(filePath);
+
+      const task = this.storage.upload(filePath, file);
+
+      await task.snapshotChanges().toPromise();
+      this.downloadURLimg$ = fileRef.getDownloadURL();
+      await this.ngxSpinnerService.hide();
+    } catch (error) {
+      await this.ngxSpinnerService.hide();
+      this.swalService.alertErrorLogin('Ocurrió un error al actualizar la foto.');
+    }
+  }
+
+  async updateProfile(userName:string,photo:string,uid:string){
+    try {
+      await this.angularFirestore.collection('users').doc(uid).update({
+        userName,
+        photo
+      });
+    } catch (error) {
+      this.swalService.alertErrorLogin('No se pudo actualizar los datos');
+    }
   }
 }

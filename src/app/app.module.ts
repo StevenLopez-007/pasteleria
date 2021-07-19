@@ -14,7 +14,7 @@ import { PagesModule } from './core/pages/pages.module';
 import { environment } from '../environments/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PhotoUrlPipe } from './pipes/photo-url.pipe';
-
+import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -32,12 +32,13 @@ import { PhotoUrlPipe } from './pipes/photo-url.pipe';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
+    ImageCropperModule,
 
     ComponentsModule,
     AuthModule,
     PagesModule
   ],
-  providers: [{provide:BUCKET,useValue:'cupcakesweet'}],
+  providers: [{provide:BUCKET,useValue:'cupcakesweet-fd4d6.appspot.com'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

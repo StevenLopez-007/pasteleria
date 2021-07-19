@@ -6,7 +6,7 @@ import { EmailverificationComponent } from './emailverification/emailverificatio
 import { VerifyEmailGuard } from '../../guards/verify-email.guard';
 import { AngularFireAuthGuard, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
-const redirectToDashboard = () => redirectLoggedInTo(['/dashboard']);
+const redirectToDashboard = () => redirectLoggedInTo(['/home']);
 const routes: Routes = [
   {
     path:'login',

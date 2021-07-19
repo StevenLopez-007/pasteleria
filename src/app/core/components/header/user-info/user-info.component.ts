@@ -16,7 +16,6 @@ export class UserInfoComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authService.user$;
-    this.authService.user$.subscribe((resp)=>console.log)
   }
 
   async signOut(){

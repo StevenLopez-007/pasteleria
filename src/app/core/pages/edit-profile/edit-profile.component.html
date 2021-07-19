@@ -1,0 +1,33 @@
+<div class="container pt-5">
+  <div class="row profile">
+    <div class="col-xl-12 content-center flex-column" *ngIf="(user|async) as user">
+      <div class="photoUser">
+        <button *ngIf="!imgTemp" class="content-center">
+          <i class="fas fa-pen"></i>
+        </button>
+        <button (click)="imgTemp=null" *ngIf="imgTemp" class="content-center">
+          <i class="fas fa-times"></i>
+        </button>
+        <img *ngIf="!imgTemp" [src]="user.photo" alt="Photo User">
+        <img *ngIf="imgTemp" [src]="imgTemp" alt="Photo User">
+        <input accept=".png,.jpg" *ngIf="!imgTemp" class="inputImg" type="file" (change)="selectImg($event.target['files'][0])" />
+
+      </div>
+      <form (ngSubmit)="updateProfile(user.uid)" [formGroup]="editProfileForm">
+        <label class="my-3" [class]="formSubmit &&editProfile.username.errors?'text-danger':''">{{
+          editProfile.username.errors?.required && formSubmit?'Nombre de usuario requerido':'Nombre de usuario'
+          }}</label>
+        <input [(ngModel)]="user.userName" type="text" formControlName="username" [placeholder]="user.userName">
+
+        <!-- <label class="my-3" [class]="formSubmit &&editProfile.email.errors?'text-danger':''">{{
+          editProfile.email.errors?.email && formSubmit?'Ingrese un E-mail válido':'Correo Electrónico'
+          }}</label>
+        <input [(ngModel)]="user.email" [placeholder]="user.email" type="email" formControlName="email" inputmode="email"> -->
+
+        <div class="mt-5  d-inline-flex justify-content-end flex-sm-row flex-column-reverse">
+          <button type="submit">Guardar cambios</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
