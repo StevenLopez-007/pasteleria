@@ -18,8 +18,8 @@
         <h2 class="dancingB text-white">CupcakeSweet</h2>
         <span><i (click)="closeSideBar()" class="fas fa-times" style="cursor: pointer; color: white; font-size: 1.75rem;"></i></span>
       </div>
+      <ng-content select="[userInfoSideBar]"></ng-content>
       <ul>
-        <ng-content select="[userInfoSideBar]"></ng-content>
         <li *ngFor="let router of headerRoutes" [routerLink]="[router.url]">
           {{router.name}}
         </li>

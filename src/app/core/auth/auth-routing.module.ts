@@ -11,18 +11,19 @@ const routes: Routes = [
   {
     path:'login',
     canActivate:[AngularFireAuthGuard],
-    data:{authGuardPipe: redirectToDashboard},
+    data:{authGuardPipe: redirectToDashboard,title:'Inicio de sesión'},
     component:LoginComponent
   },
   {
     path:'register',
     canActivate:[AngularFireAuthGuard],
-    data:{authGuardPipe: redirectToDashboard},
+    data:{authGuardPipe: redirectToDashboard,title:'Creación de cuenta'},
     component:RegisterComponent
   },
   {
     path:'emailverification',
     canActivate:[VerifyEmailGuard],
+    data:{title:'Verificación de E-Email'},
     component:EmailverificationComponent
   }
 ];

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 import Cropper from 'cropperjs';
 import { ModalService } from '../modal/modal.service';
@@ -9,7 +9,7 @@ import { SwalService } from '../../../services/swal.service';
   templateUrl: './image-cropper.component.html',
   styleUrls: ['./image-cropper.component.css']
 })
-export class ImageCropperComponent implements OnInit, AfterViewInit {
+export class ImageCropperComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild("image", { static: false }) imageElement: ElementRef;
 
@@ -25,11 +25,13 @@ export class ImageCropperComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.modalService.confirmButton$.subscribe(async (click: any) => {
       try {
-        await this.ngxSpinnerService.show(this.nameSpinner);
-        const imgBase64 = await this.cropImg();
-        this.imageDestination.emit(imgBase64);
-        await this.ngxSpinnerService.hide(this.nameSpinner);
-        this.modalService.closeModal();
+        if (this.cropper) {
+          await this.ngxSpinnerService.show(this.nameSpinner);
+          const imgBase64 = await this.cropImg();
+          this.imageDestination.emit(imgBase64);
+          await this.ngxSpinnerService.hide(this.nameSpinner);
+          this.modalService.closeModal();
+        }
       } catch (error) {
         this.swalService.mixinSwal('error', error);
         await this.ngxSpinnerService.hide(this.nameSpinner);
@@ -39,36 +41,48 @@ export class ImageCropperComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      this.cropper = new Cropper(this.imageElement.nativeElement, {
-        zoomable: false,
-        scalable: false,
-        aspectRatio: 1,
-        dragMode: 'crop',
-
-        viewMode: 2,
-        autoCropArea: 1,
-        center: true,
-        restore: false,
-        zoomOnWheel: false,
-        cropBoxResizable: false
-      });
+      this.configCropper();
     }, 1000);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.imageSource.previousValue) {
+      this.cropper.destroy();
+      this.cropper = null;
+      setTimeout(() => { this.configCropper() }, 1000)
+    }
   }
 
   async cropImg(): Promise<string> {
     return new Promise((resolve, reject) => {
       try {
         const canvas = this.cropper.getCroppedCanvas({
-          imageSmoothingQuality:'medium',
-          maxHeight:700,
-          maxWidth:700,
-          minHeight:300,
-          minWidth:300,
+          imageSmoothingQuality: 'medium',
+          maxHeight: 700,
+          maxWidth: 700,
+          minHeight: 300,
+          minWidth: 300,
         });
         resolve(canvas.toDataURL());
       } catch (error) {
         reject('No se pudo recortar la imagen.')
       }
+    });
+  }
+
+  configCropper() {
+    this.cropper = new Cropper(this.imageElement.nativeElement, {
+      zoomable: false,
+      scalable: false,
+      aspectRatio: 1,
+      dragMode: 'crop',
+
+      viewMode: 2,
+      autoCropArea: 1,
+      center: true,
+      restore: false,
+      zoomOnWheel: false,
+      cropBoxResizable: false
     });
   }
 

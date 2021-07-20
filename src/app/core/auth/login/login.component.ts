@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private authService: AuthService) { }
 
   ngOnInit(): void {
-    document.title = `${environment.name} - Inicio de sesión`;
     this.configFormLogin();
     this.login();
   }

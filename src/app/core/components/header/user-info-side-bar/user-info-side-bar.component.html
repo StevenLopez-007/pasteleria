@@ -1,9 +1,9 @@
-<li>
+
   <div class="userInfo" *ngIf="(user|async) as user">
     <div class="infoUserSideBar hidden-md-up" >
       <div class="card bg-transparent" style="border:none;" data-bs-toggle="collapse" data-bs-target="#settings" aria-expanded="false" aria-controls="settings">
         <button class="buttonExpand"><i class="fas fa-angle-down"></i></button>
-        <img [src]="user.photo" class="card-img-top" alt="Photo User">
+        <img #userPhoto [src]="user.photo" class="card-img-top" alt="Photo User">
         <div class="card-body p-2">
           <h4 class="card-title sarabunB">{{user.userName}}</h4>
           <h6 class="card-subtitle mb-2 text-dark">{{user.email}}</h6>
@@ -12,11 +12,11 @@
 
       <div class="collapse" id="settings">
         <ul>
-          <li [routerLink]="['/home','edit-profile']"><i class="fas fa-cog"></i> Configuración</li>
+          <li [routerLink]="['/home','edit-profile']"><i class="fas fa-pen"></i> Editar Perfil</li>
           <hr>
           <li (click)="signOut()"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</li>
         </ul>
       </div>
     </div>
   </div>
-</li>
+

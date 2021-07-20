@@ -46,6 +46,7 @@ export class EditProfileComponent implements OnInit,AfterViewInit {
         this.downloadUrlImgSub = this.authService.downloadURLimg$.subscribe(async (url: any) => {
           await this.authService.updateProfile(this.editProfileForm.value.username, url, uid);
           this.imgTemp = null;
+          this.imgCropped =null;
         });
       }else{
         this.authService.updateProfile(this.editProfileForm.value.username,defaultPhoto,uid);

@@ -7,12 +7,14 @@ import { EditProfileGuard } from '../../guards/edit-profile.guard';
 const routes: Routes = [
   {
     path:'',
-    component:HomeComponent
+    component:HomeComponent,
+    data:{title:'Inicio'}
   },
   {
     path:'edit-profile',
     canActivate:[EditProfileGuard],
-    component:EditProfileComponent
+    component:EditProfileComponent,
+    data:{title:'Editar perfil'}
   },
   {
     path:'**',

@@ -13,7 +13,7 @@
     <label [class]="formSubmit &&registerFormControls.password.errors?'text-danger':''">{{ registerFormControls.password.errors?.minlength && formSubmit?'Contreseña muy corta':'Contraseña'}}</label>
     <div class="d-flex align-items-center divInput">
       <input #inputPassword [type]="showPassword?'text':'password'" formControlName="password">
-      <i (click)="(showPassword = !showPassword); inputPassword.focus()" class="mx-2 cursor-pointer" [class]="showPassword?'fas fa-eye-slash':'fas fa-eye'"></i>
+      <i (click)="(showPassword = !showPassword); inputPassword.focus()" class="mx-2 cursor-pointer" [class]="showPassword?'fas fa-eye':'fas fa-eye-slash'"></i>
     </div>
 
     <div class="my-4 d-inline-flex justify-content-between flex-sm-row flex-column-reverse">
@@ -25,9 +25,9 @@
   <div class="container">
     <img src="/assets/logo.svg" alt="Logo" class="imgCardSmall my-3 cursor-pointer" routerLink="/">
     <h2 class="sarabunB">Creación de cuenta</h2>
-    <h4 class="sarabunM">¿Ya tienes una cuenta?, inicia sesión</h4>
-    <div class="mt-5">
+    <h4 class="sarabunM">¿Ya tienes una cuenta?, <strong class="cursor-pointer" routerLink="/login" [skipLocationChange]="true" style="text-decoration: underline;">inicia sesión</strong></h4>
+    <!-- <div class="mt-5">
       <button type="button" class="buttonLR sarabunB" routerLink="/login" [skipLocationChange]="true">Iniciar sesión.</button>
-    </div>
+    </div> -->
   </div>
 </app-auth-template>

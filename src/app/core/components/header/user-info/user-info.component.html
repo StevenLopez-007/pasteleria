@@ -1,24 +1,28 @@
 <li>
-  <div class="userInfo" *ngIf="(user|async) as user">
+  <div class="userInfo">
     <div class="dropdown infoUserNavBar hidden-sm-down">
-      <img id="dropdownMenuButton1" data-bs-toggle="dropdown" class="dropdown-toggle cursor-pointer" [src]="user.photo"
-        alt="Photo User">
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-        <li>
-          <div>
-            <a class="dropdown-item">
-              <h5 class="sarabunB">{{user.userName}}</h5>
-              <h6>{{user.email}}</h6>
-            </a>
-          </div>
-          <hr class="m-0">
-        </li>
-        <li class="cursor-pointer" [routerLink]="['/home','edit-profile']"><a class="dropdown-item"><i class="fas m-2 fa-cog"></i> Configuración</a></li>
-        <li (click)="signOut()"><a class="dropdown-item cursor-pointer"><i class="fas m-2 fa-sign-out-alt"></i> Cerrar
-            Sesión</a></li>
-      </ul>
+
+      <div #loadingImg class="loadingImg"></div>
+
+      <div *ngIf="(user|async) as user">
+        <img #userPhoto (load)="onLoadImg(userPhoto,loadingImg)" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+          class="dropdown-toggle cursor-pointer d-none" [src]="user.photo" alt="Photo User">
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li>
+            <div>
+              <a class="dropdown-item">
+                <h5 class="sarabunB">{{user.userName}}</h5>
+                <h6>{{user.email}}</h6>
+              </a>
+            </div>
+            <hr class="m-0">
+          </li>
+          <li class="cursor-pointer" [routerLink]="['/home','edit-profile']"><a class="dropdown-item"><i
+                class="fas m-2 fa-pen"></i>Editar Pefil</a></li>
+          <li (click)="signOut()"><a class="dropdown-item cursor-pointer"><i class="fas m-2 fa-sign-out-alt"></i> Cerrar
+              Sesión</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </li>
-
-

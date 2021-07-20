@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private authService: AuthService,private ngxSpinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    document.title = `${environment.name} - Creación de cuenta`
     this.configRegisterForm();
     this.register();
   }
@@ -62,9 +61,9 @@ export class RegisterComponent implements OnInit {
 
   configRegisterForm(){
     this.registerForm = this.formBuilder.group({
-      username:['stevenlopez',[Validators.required,Validators.min(5),Validators.max(10)]],
-      email:['sa_lopez_galvez@hotmail.com',[Validators.required,Validators.email]],
-      password:['123456789',[Validators.required,Validators.minLength(6)]]
+      username:['',[Validators.required,Validators.min(5),Validators.max(10)]],
+      email:['',[Validators.required,Validators.email]],
+      password:['',[Validators.required,Validators.minLength(6)]]
     });
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { AuthService } from '../../../auth/auth.service';
 import { User } from '../../../auth/interfaces/user';
 import { Observable } from 'rxjs';
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class UserInfoComponent implements OnInit {
 
   user:Observable<User>;
+  showLoadImg:boolean=true;
 
   constructor(private authService: AuthService) { }
 
@@ -20,6 +21,11 @@ export class UserInfoComponent implements OnInit {
 
   async signOut(){
     await this.authService.signOut();
+  }
+
+  onLoadImg(userPhoto:HTMLImageElement,loadingImg:HTMLDivElement){
+    loadingImg.classList.add('d-none');
+    userPhoto.classList.remove('d-none');
   }
 
 

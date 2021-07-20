@@ -2,7 +2,7 @@
   <div class="row profile">
     <div class="col-xl-12 content-center flex-column" *ngIf="(user|async) as user">
       <div class="photoUser">
-        <button *ngIf="!imgTemp" class="content-center">
+        <button *ngIf="!imgCropped" class="content-center">
           <i class="fas fa-pen"></i>
         </button>
         <!-- Reset img -->
@@ -20,7 +20,7 @@
         <!-- Photo to upload -->
         <img *ngIf="imgCropped" [src]="imgCropped" alt="Photo User">
 
-        <input accept=".png,.jpg" *ngIf="!imgTemp" class="inputImg" type="file" (change)="selectImg($event.target['files'][0])" />
+        <input accept=".png,.jpg" *ngIf="!imgCropped" class="inputImg" type="file" (change)="selectImg($event.target['files'][0])" />
 
       </div>
       <form (ngSubmit)="updateProfile(user.uid,user.photo)" [formGroup]="editProfileForm">
@@ -41,6 +41,6 @@
     </div>
   </div>
 </div>
-<app-modal *ngIf="imgTemp">
+<app-modal [title]="'Nueva foto de perfil'" *ngIf="imgTemp">
   <app-image-cropper (imageDestination)="cropImg($event)" body [src]="imgTemp"></app-image-cropper>
 </app-modal>

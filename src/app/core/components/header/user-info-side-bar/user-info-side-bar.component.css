@@ -19,6 +19,12 @@
   transform: rotate(0deg);
 }
 
+.card-subtitle{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-wrap: normal;
+}
+
 #settings ul{
   list-style: none;
 }
@@ -27,4 +33,14 @@
   color: white;
   /* margin: 1.5rem 0; */
   font-family: "Sarabun Medium";
+}
+
+@media screen and (max-width:460px){
+  .card-title{
+    font-size: 1.15rem;
+  }
+
+  .card-subtitle{
+    font-size: 1rem;
+  }
 }

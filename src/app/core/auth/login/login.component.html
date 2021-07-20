@@ -7,7 +7,7 @@
     <label [class]="formSubmit &&loginFormControls.password.errors?'text-danger':''">{{ loginFormControls.password.errors?.minlength && formSubmit?'Contreseña muy corta':'Contraseña'}}</label>
     <div class="d-flex align-items-center divInput">
       <input #inputPassword [type]="showPassword?'text':'password'" formControlName="password" inputmode="email">
-      <i (click)="(showPassword = !showPassword);inputPassword.focus()" class="mx-2 cursor-pointer" [class]="showPassword?'fas fa-eye-slash':'fas fa-eye'"></i>
+      <i (click)="(showPassword = !showPassword);inputPassword.focus()" class="mx-2 cursor-pointer" [class]="showPassword?'fas fa-eye':'fas fa-eye-slash'"></i>
     </div>
     <div class="mt-4 d-inline-flex justify-content-between flex-sm-row flex-column-reverse">
       <label class="mt-3 m-sm-0 text-sm-start text-center" (click)="resetPassword()" style="text-decoration: underline; cursor: pointer;">Olvidé mi contraseña</label>
@@ -18,9 +18,9 @@
   <div class="container">
     <img src="/assets/logo.svg" alt="Logo" class="imgCardSmall my-3 cursor-pointer" routerLink="/">
     <h2 class="sarabunB">Inicio de sesión</h2>
-    <h4 class="sarabunM">¿No tienes una cuenta?, registrate</h4>
-    <div class="mt-5">
-      <button type="button" class="buttonLR sarabunB" routerLink="/register" [skipLocationChange]="true">Registrate.</button>
-    </div>
+    <h4 class="sarabunM">¿No tienes una cuenta?, <strong class="cursor-pointer" routerLink="/register" [skipLocationChange]="true" style="text-decoration: underline;">registrate</strong></h4>
+    <!-- <div class="mt-5">
+      <button type="button" class="buttonLR sarabunB">Registrate.</button>
+    </div> -->
   </div>
 </app-auth-template>

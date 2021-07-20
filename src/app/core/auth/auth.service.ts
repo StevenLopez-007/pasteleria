@@ -1,17 +1,23 @@
 import { Injectable } from '@angular/core';
+
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireStorage} from '@angular/fire/storage';
-import { Router } from '@angular/router';
-import { RegisterAndLogin } from './interfaces/registerAndLogin';
-import { SwalService } from '../../services/swal.service';
-import * as fb from 'firebase/app';
-import { getMsgError } from 'src/app/class/error.class';
-import { NgxSpinnerService } from 'ngx-spinner';
-import { User } from './interfaces/user';
-import { environment } from '../../../environments/environment';
-import { BehaviorSubject, Observable, EMPTY, of } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireStorage} from '@angular/fire/storage';
+import * as fb from 'firebase/app';
+
+import { Router } from '@angular/router';
+
+import { RegisterAndLogin } from './interfaces/registerAndLogin';
 import { NewUser } from './interfaces/newUser';
+import { User } from './interfaces/user';
+
+import { SwalService } from '../../services/swal.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
+import { getMsgError } from 'src/app/class/error.class';
+import { environment } from '../../../environments/environment';
+
+import { BehaviorSubject, Observable, EMPTY, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({

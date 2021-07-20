@@ -102,9 +102,9 @@ export class LandingPageComponent implements OnInit {
   }
 
   getSpecialsWeek(){
-    this.angularFirestore.collection('week_specials').valueChanges()
+    this.angularFirestore.collection('week_specials').doc('week_specials').valueChanges()
     .pipe(
-      map((resp:any)=>resp[0].cupcakes)
+      map((resp:any)=>resp.cupcakes)
     )
     .subscribe((resp:any[])=>{
       const weekSpecials = []
