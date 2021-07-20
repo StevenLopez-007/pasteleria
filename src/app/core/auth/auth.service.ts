@@ -223,12 +223,15 @@ export class AuthService {
 
   async updateProfile(userName:string,photo:string,uid:string){
     try {
+      await this.ngxSpinnerService.show();
       await this.angularFirestore.collection('users').doc(uid).update({
         userName,
         photo
       });
+      await this.ngxSpinnerService.hide();
     } catch (error) {
       this.swalService.alertErrorLogin('No se pudo actualizar los datos');
+      await this.ngxSpinnerService.hide();
     }
   }
 }

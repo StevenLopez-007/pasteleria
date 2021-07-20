@@ -14,7 +14,6 @@ import { PagesModule } from './core/pages/pages.module';
 import { environment } from '../environments/environment';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PhotoUrlPipe } from './pipes/photo-url.pipe';
-import { ImageCropperModule } from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -32,7 +31,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
-    ImageCropperModule,
 
     ComponentsModule,
     AuthModule,

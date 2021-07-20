@@ -9,6 +9,10 @@
   position: relative;
   overflow: hidden;
 }
+/* #imageToUpload{
+  display: block !important;
+  max-width: 100% !important;
+} */
 .inputImg {
   position: absolute;
   left: 0;

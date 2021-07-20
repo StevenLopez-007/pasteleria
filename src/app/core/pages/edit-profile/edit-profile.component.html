@@ -5,19 +5,29 @@
         <button *ngIf="!imgTemp" class="content-center">
           <i class="fas fa-pen"></i>
         </button>
-        <button (click)="imgTemp=null" *ngIf="imgTemp" class="content-center">
+        <!-- Reset img -->
+        <button (click)="(imgTemp=null);(imgCropped=null)" *ngIf="imgCropped" class="content-center">
           <i class="fas fa-times"></i>
         </button>
-        <img *ngIf="!imgTemp" [src]="user.photo" alt="Photo User">
-        <img *ngIf="imgTemp" [src]="imgTemp" alt="Photo User">
+
+        <!-- Edit img (cropper) -->
+        <button (click)="openModal()" style="left:0 !important;" *ngIf="imgCropped" class="content-center">
+          <i class="fas fa-crop-alt"></i>
+        </button>
+
+        <!-- Current photo user -->
+        <img *ngIf="!imgCropped" [src]="user.photo" alt="Photo User">
+        <!-- Photo to upload -->
+        <img *ngIf="imgCropped" [src]="imgCropped" alt="Photo User">
+
         <input accept=".png,.jpg" *ngIf="!imgTemp" class="inputImg" type="file" (change)="selectImg($event.target['files'][0])" />
 
       </div>
-      <form (ngSubmit)="updateProfile(user.uid)" [formGroup]="editProfileForm">
-        <label class="my-3" [class]="formSubmit &&editProfile.username.errors?'text-danger':''">{{
-          editProfile.username.errors?.required && formSubmit?'Nombre de usuario requerido':'Nombre de usuario'
+      <form (ngSubmit)="updateProfile(user.uid,user.photo)" [formGroup]="editProfileForm">
+        <label class="my-3" [class]="formSubmit &&editProfileControls.username.errors?'text-danger':''">{{
+          editProfileControls.username.errors?.required && formSubmit?'Nombre de usuario requerido':'Nombre de usuario'
           }}</label>
-        <input [(ngModel)]="user.userName" type="text" formControlName="username" [placeholder]="user.userName">
+        <input type="text" [defaultValue]="user.userName" formControlName="username" [placeholder]="user.userName">
 
         <!-- <label class="my-3" [class]="formSubmit &&editProfile.email.errors?'text-danger':''">{{
           editProfile.email.errors?.email && formSubmit?'Ingrese un E-mail válido':'Correo Electrónico'
@@ -31,3 +41,6 @@
     </div>
   </div>
 </div>
+<app-modal *ngIf="imgTemp">
+  <app-image-cropper (imageDestination)="cropImg($event)" body [src]="imgTemp"></app-image-cropper>
+</app-modal>
